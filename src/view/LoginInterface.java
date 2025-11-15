@@ -13,7 +13,11 @@ import java.awt.event.ActionListener;
  */
 public class LoginInterface extends JFrame{
     private JButton loginButton;
+    private JButton createAccountButton;
+    private JButton forgotPasswordButton;
     private JLabel title;
+    private JLabel usernameLabel;
+    private JLabel passwordLabel;
     private JTextField usernameField;
     private JPasswordField passwordField;
 
@@ -35,7 +39,11 @@ public class LoginInterface extends JFrame{
      */
     private void initComponents() {
         loginButton = new javax.swing.JButton();
+        createAccountButton = new JButton();
+        forgotPasswordButton = new JButton();
         title = new javax.swing.JLabel();
+        usernameLabel = new JLabel("Username");
+        passwordLabel = new JLabel("Password");
         usernameField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
 
@@ -43,9 +51,21 @@ public class LoginInterface extends JFrame{
 
         loginButton.setBackground(new java.awt.Color(153, 153, 153));
         loginButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        loginButton.setForeground(new java.awt.Color(255, 255, 255));
+        loginButton.setForeground(new java.awt.Color(0, 0, 0));
         loginButton.setText("Login");
         loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        createAccountButton.setBackground(new java.awt.Color(153, 153, 153));
+        createAccountButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        createAccountButton.setForeground(new java.awt.Color(0, 0, 0));
+        createAccountButton.setText("Create Account");
+        createAccountButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        forgotPasswordButton.setBackground(new java.awt.Color(153, 153, 153));
+        forgotPasswordButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        forgotPasswordButton.setForeground(new java.awt.Color(0, 0, 0));
+        forgotPasswordButton.setText("Forgot Password");
+        forgotPasswordButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         title.setBackground(new java.awt.Color(204, 204, 204));
         title.setFont(new java.awt.Font("Tahoma", 0, 54)); // NOI18N
@@ -54,36 +74,55 @@ public class LoginInterface extends JFrame{
         title.setText("Login");
         title.setOpaque(true);
 
-        usernameField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        usernameLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
+        passwordLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
 
-        passwordField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        usernameField.setFont(new java.awt.Font("Tahoma", 0, 17));
+        passwordField.setFont(new java.awt.Font("Tahoma", 0, 17));
+
+        usernameField.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
+
+        passwordField.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
+
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(50)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                        .addComponent(usernameLabel)
+                                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(passwordLabel)
+                                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addGap(19, 19, 19)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(passwordField))))
-                                .addContainerGap(47, Short.MAX_VALUE))
-                        .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(10)
+                                                .addComponent(forgotPasswordButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(50))
         );
+
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(20)
+                                .addComponent(usernameLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(15)
+                                .addComponent(passwordLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
+                                .addGap(30)
                                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(forgotPasswordButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -97,6 +136,8 @@ public class LoginInterface extends JFrame{
      */
     public void setActionListener(ActionListener e){
         loginButton.addActionListener(e);
+        createAccountButton.addActionListener(e);
+        forgotPasswordButton.addActionListener(e);
     }
 
     /**
