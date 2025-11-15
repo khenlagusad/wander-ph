@@ -36,24 +36,14 @@ public class TourAssignmentDAO {
     }
 
     /**
-     * Updates the guide ID of a TourAssignment.
+     * Updates the TourAssignment's modifiable fields (tour_id, guide_id).
      *
-     * @param tour_id The unique ID of the tour.
-     * @param guide_id The new guide ID to set.
+     * @param assignment the TourAssignment object to be updated.
      */
-    public void updateGuideId(String tour_id, String guide_id) {
+    public void updateTourAssignment(TourAssignment assignment) {
         // SQL Statement
     }
 
-    /**
-     * Updates the tour ID of a TourAssignment.
-     *
-     * @param guide_id The unique ID of the guide.
-     * @param tour_id The new tour ID to set.
-     */
-    public void updateTourId(String guide_id, String tour_id) {
-        // SQL Statement
-    }
 
     /**
      * Inserts a new TourAssignment record into the database.

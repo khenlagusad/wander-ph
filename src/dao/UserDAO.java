@@ -35,86 +35,6 @@ public class UserDAO {
     }
 
     /**
-     * Updates the first name of a user.
-     *
-     * @param userId the unique ID of the user
-     * @param firstName the new first name to set
-     */
-    public void updateFirstName(String userId, String firstName) {
-        // SQL Statement
-    }
-
-    /**
-     * Updates the last name of a user.
-     *
-     * @param userId the unique ID of the user
-     * @param lastName the new last name to set
-     */
-    public void updateLastName(String userId, String lastName) {
-        // SQL Statement
-    }
-
-    /**
-     * Updates the username of a user.
-     *
-     * @param userId the unique ID of the user
-     * @param username the new username to set
-     */
-    public void updateUsername(String userId, String username) {
-        // SQL Statement
-    }
-
-    /**
-     * Updates the password of a user.
-     *
-     * @param userId the unique ID of the user
-     * @param password the new password to set
-     */
-    public void updatePassword(String userId, String password) {
-        // SQL Statement
-    }
-
-    /**
-     * Updates the phone number of a user.
-     *
-     * @param userId the unique ID of the user
-     * @param phoneNumber the new phone number to set
-     */
-    public void updatePhoneNumber(String userId, String phoneNumber) {
-        // SQL Statement
-    }
-
-    /**
-     * Updates the email address of a user.
-     *
-     * @param userId the unique ID of the user
-     * @param emailAddress the new email address to set
-     */
-    public void updateEmailAddress(String userId, String emailAddress) {
-        // SQL Statement
-    }
-
-    /**
-     * Updates the home address of a user.
-     *
-     * @param userId the unique ID of the user
-     * @param homeAddress the new home address to set
-     */
-    public void updateHomeAddress(String userId, String homeAddress) {
-        // SQL Statement
-    }
-
-    /**
-     * Updates the nationality of a user.
-     *
-     * @param userId the unique ID of the user
-     * @param nationality the new nationality to set
-     */
-    public void updateNationality(String userId, String nationality) {
-        // SQL Statement
-    }
-
-    /**
      * Inserts a new user into the database.
      *
      * @param user the User object containing all user information
@@ -124,9 +44,10 @@ public class UserDAO {
     }
 
     /**
-     * Updates an existing user with all modifiable fields.
+     * Updates an existing User's modifiable fields (first_name, last_name,
+     * username, password, phone number, email address, home address, nationality).
      *
-     * @param user the User object containing updated values
+     * @param user the User object containing updated values.
      */
     public void updateUser(User user){
         // SQL Statement
