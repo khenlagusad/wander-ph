@@ -20,7 +20,7 @@ public class UserDAO {
      * @return User object corresponding to the given ID
      */
     public User getUser(String user_id){
-        // SQL Statement
+        String sql = "SELECT * from users WHERE user_id=  ? ";
         return null;
     }
 
@@ -30,7 +30,7 @@ public class UserDAO {
      * @return List of all User objects
      */
     public List<User> getUsers(){
-        // SQL Statement
+        String sql = "SELECT * from users ORDER BY user_id asc";
         return null;
     }
 
