@@ -13,6 +13,7 @@ public class UserInterface extends JFrame {
     private ViewTransactionsInterface transactionsPage;
     private BookTourInterface bookTourPage;
     private ManageBookingsInterface manageBookingsPage;
+    private ManageProfileInterface manageProfilePage;
 
     public UserInterface() {
         setTitle("User");
@@ -33,6 +34,7 @@ public class UserInterface extends JFrame {
         transactionsPage = new ViewTransactionsInterface();
         bookTourPage = new BookTourInterface();
         manageBookingsPage = new ManageBookingsInterface();
+        manageProfilePage = new ManageProfileInterface();
 
         // Add HOME PAGE to cards
         contentPanel.add(homePage, "HOME");
@@ -40,6 +42,7 @@ public class UserInterface extends JFrame {
         contentPanel.add(transactionsPage, "VIEW TRANSACTIONS");
         contentPanel.add(bookTourPage, "BOOK TOUR");
         contentPanel.add(manageBookingsPage, "MANAGE BOOKINGS");
+        contentPanel.add(manageProfilePage, "MANAGE PROFILE");
 
         // Add BOOK PAGE (placeholder)
         contentPanel.add(new JPanel(){{
@@ -76,6 +79,12 @@ public class UserInterface extends JFrame {
         sidePanel.labelManageBooking.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 cardLayout.show(contentPanel, "MANAGE BOOKINGS");
+            }
+        });
+
+        sidePanel.labelManageProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                cardLayout.show(contentPanel, "MANAGE PROFILE");
             }
         });
 
