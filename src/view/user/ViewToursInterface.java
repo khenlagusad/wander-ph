@@ -3,11 +3,11 @@ package view.user;
 import javax.swing.*;
 import java.awt.*;
 
-public class ToursInterface extends JPanel {
+public class ViewToursInterface extends JPanel {
     private JPanel listPanel;
     private JScrollPane scrollPane;
 
-    public ToursInterface() {
+    public ViewToursInterface() {
         setLayout(new BorderLayout());
 
         listPanel = new JPanel();
