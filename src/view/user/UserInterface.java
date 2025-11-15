@@ -9,6 +9,7 @@ public class UserInterface extends JFrame {
 
     private SidePanel sidePanel;
     private HomePageInterface homePage;
+    private ToursInterface toursPage;
 
     public UserInterface() {
         setTitle("User");
@@ -25,9 +26,11 @@ public class UserInterface extends JFrame {
 
         // Instantiate HOME PAGE
         homePage = new HomePageInterface();
+        toursPage = new ToursInterface();
 
         // Add HOME PAGE to cards
         contentPanel.add(homePage, "HOME");
+        contentPanel.add(toursPage, "VIEW TOURS");
 
         // Add BOOK PAGE (placeholder)
         contentPanel.add(new JPanel(){{
@@ -43,9 +46,9 @@ public class UserInterface extends JFrame {
             }
         });
 
-        sidePanel.labelBookTour.addMouseListener(new java.awt.event.MouseAdapter() {
+        sidePanel.labelViewTours.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                cardLayout.show(contentPanel, "BOOK");
+                cardLayout.show(contentPanel, "VIEW TOURS");
             }
         });
 
