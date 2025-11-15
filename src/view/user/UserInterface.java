@@ -11,6 +11,7 @@ public class UserInterface extends JFrame {
     private HomePageInterface homePage;
     private ViewToursInterface toursPage;
     private ViewTransactionsInterface transactionsPage;
+    private BookTourInterface bookTourPage;
 
     public UserInterface() {
         setTitle("User");
@@ -29,11 +30,13 @@ public class UserInterface extends JFrame {
         homePage = new HomePageInterface();
         toursPage = new ViewToursInterface();
         transactionsPage = new ViewTransactionsInterface();
+        bookTourPage = new BookTourInterface();
 
         // Add HOME PAGE to cards
         contentPanel.add(homePage, "HOME");
         contentPanel.add(toursPage, "VIEW TOURS");
         contentPanel.add(transactionsPage, "VIEW TRANSACTIONS");
+        contentPanel.add(bookTourPage, "BOOK TOUR");
 
         // Add BOOK PAGE (placeholder)
         contentPanel.add(new JPanel(){{
@@ -58,6 +61,12 @@ public class UserInterface extends JFrame {
         sidePanel.labelViewTransactions.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 cardLayout.show(contentPanel, "VIEW TRANSACTIONS");
+            }
+        });
+
+        sidePanel.labelBookTour.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                cardLayout.show(contentPanel, "BOOK TOUR");
             }
         });
 
