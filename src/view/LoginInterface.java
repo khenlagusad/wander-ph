@@ -3,12 +3,23 @@ package view;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
+/**
+ * This class represents the login interface of the application.
+ * It provides text fields for username and password input,
+ * a login button, and layout management using GroupLayout.
+ *
+ * @author Khen Lagusad
+ * @version 1.0
+ */
 public class LoginInterface extends JFrame{
     private JButton loginButton;
     private JLabel title;
     private JTextField usernameField;
     private JPasswordField passwordField;
 
+    /**
+     * Constructs the login interface and initializes its components.
+     */
     public LoginInterface(){
         initComponents();
 
@@ -19,6 +30,9 @@ public class LoginInterface extends JFrame{
         setVisible(true);
     }
 
+    /**
+     * Initializes and arranges GUI components on the frame.
+     */
     private void initComponents() {
         loginButton = new javax.swing.JButton();
         title = new javax.swing.JLabel();
@@ -76,19 +90,37 @@ public class LoginInterface extends JFrame{
         pack();
     }
 
+    /**
+     * Sets the ActionListener for the login button.
+     *
+     * @param e the ActionListener to be added
+     */
     public void setActionListener(ActionListener e){
         loginButton.addActionListener(e);
     }
 
+    /**
+     * Fetches the text entered in the username field.
+     *
+     * @return the username as a String
+     */
     public String fetchUsernameField(){
         return usernameField.getText();
     }
 
+    /**
+     * Fetches the text entered in the password field.
+     *
+     * @return the password as a String
+     */
     public String fetchPasswordField() {
         char[] passwordChars = passwordField.getPassword();
         return new String(passwordChars);
     }
 
+    /**
+     * Clears the text fields for username and password.
+     */
     public void clearTextfields(){
         usernameField.setText("");
         passwordField.setText("");
