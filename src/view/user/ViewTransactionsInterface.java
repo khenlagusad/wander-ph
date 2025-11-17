@@ -8,7 +8,7 @@ import java.awt.*;
 public class ViewTransactionsInterface extends JPanel {
 
     private JLabel titleLabel;
-    private JPanel mainPanel;
+    private JPanel contentPanel;
     private JScrollPane scrollPane;
     private JTable transactionTable;
 
@@ -36,24 +36,34 @@ public class ViewTransactionsInterface extends JPanel {
         addTransaction("REFUND", 800.0, "2025-11-16", "09:45");
         addTransaction("PAYMENT", 1200.0, "2025-11-16", "14:20");
         addTransaction("TOP UP", 3000.0, "2025-11-17", "11:10");
-        addTransaction("TOP UP", 5000.0, "2025-11-15", "10:30");
-        addTransaction("PAYMENT", 2500.0, "2025-11-15", "15:30");
-        addTransaction("REFUND", 800.0, "2025-11-16", "09:45");
-        addTransaction("PAYMENT", 1200.0, "2025-11-16", "14:20");
-        addTransaction("TOP UP", 3000.0, "2025-11-17", "11:10");
+
     }
 
     private void initComponents() {
-        mainPanel = new JPanel();
-        mainPanel.setBackground(Color.WHITE);
+        setLayout(new BorderLayout());
+        setBackground(Color.WHITE);
 
-        // Title
+        // -------------------
+        // Title Label
+        // -------------------
         titleLabel = new JLabel("Your Transactions");
-        titleLabel.setFont(new Font("Tahoma", Font.BOLD, 32)); // slightly smaller
-        titleLabel.setForeground(new Color(0, 102, 204));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 26)); // same size as Manage Profile
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setForeground(new Color(0, 102, 204));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0)); // top padding
 
+        add(titleLabel, BorderLayout.NORTH);
+
+        // -------------------
+        // Content Panel (center)
+        // -------------------
+        contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setBackground(Color.WHITE);
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 50, 50)); // padding around table
+
+        // -------------------
         // Table model
+        // -------------------
         String[] columns = {"Transaction Type", "Amount", "Transaction Date", "Transaction Time"};
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
             @Override
@@ -70,11 +80,11 @@ public class ViewTransactionsInterface extends JPanel {
         transactionTable = new JTable(model);
         transactionTable.setRowHeight(26);
         transactionTable.setFillsViewportHeight(true);
-        transactionTable.setFont(new Font("SansSerif", Font.PLAIN, 12)); // smaller entries
+        transactionTable.setFont(new Font("SansSerif", Font.PLAIN, 12));
         transactionTable.setGridColor(new Color(220, 220, 220));
         transactionTable.setIntercellSpacing(new Dimension(15, 5));
 
-        // Headers bigger, bold, centered
+        // Headers
         transactionTable.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));
         ((DefaultTableCellRenderer) transactionTable.getTableHeader().getDefaultRenderer())
                 .setHorizontalAlignment(SwingConstants.CENTER);
@@ -95,8 +105,6 @@ public class ViewTransactionsInterface extends JPanel {
         };
         leftRendererWithPeso.setHorizontalAlignment(SwingConstants.LEFT);
 
-        // Apply renderer
-
         transactionTable.getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
         transactionTable.getColumnModel().getColumn(1).setCellRenderer(leftRendererWithPeso);
         transactionTable.getColumnModel().getColumn(2).setCellRenderer(leftRenderer);
@@ -111,13 +119,9 @@ public class ViewTransactionsInterface extends JPanel {
         scrollPane = new JScrollPane(transactionTable);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        // Layout
-        mainPanel.setLayout(new BorderLayout(0, 15));
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        contentPanel.add(scrollPane, BorderLayout.CENTER);
 
-        setLayout(new BorderLayout());
-        add(mainPanel, BorderLayout.CENTER);
+        add(contentPanel, BorderLayout.CENTER);
     }
 
     public void addTransaction(String type, double amount, String date, String time) {

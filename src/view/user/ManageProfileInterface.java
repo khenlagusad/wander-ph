@@ -24,6 +24,8 @@ public class ManageProfileInterface extends JPanel {
         titleLabel = new JLabel("Manage Your Profile");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 26));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setForeground(new Color(0, 102, 204));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(titleLabel, BorderLayout.NORTH);
 
         // Form Panel with GridBagLayout
@@ -32,6 +34,7 @@ public class ManageProfileInterface extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 20, 10, 20);
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.WEST;
 
         // Labels
         firstNameLabel = new JLabel("First Name:");
@@ -64,32 +67,41 @@ public class ManageProfileInterface extends JPanel {
         dobField = new JTextField("01/01/2000");
         dobField.setEditable(false);
 
-        // Add components
-        gbc.gridx = 0; gbc.gridy = 0; formPanel.add(firstNameLabel, gbc);
+        // Add components row by row
+        int row = 0;
+        gbc.gridx = 0; gbc.gridy = row; formPanel.add(firstNameLabel, gbc);
         gbc.gridx = 1; formPanel.add(firstNameField, gbc);
 
-        gbc.gridx = 0; gbc.gridy++; formPanel.add(lastNameLabel, gbc);
+        row++;
+        gbc.gridx = 0; gbc.gridy = row; formPanel.add(lastNameLabel, gbc);
         gbc.gridx = 1; formPanel.add(lastNameField, gbc);
 
-        gbc.gridx = 0; gbc.gridy++; formPanel.add(usernameLabel, gbc);
+        row++;
+        gbc.gridx = 0; gbc.gridy = row; formPanel.add(usernameLabel, gbc);
         gbc.gridx = 1; formPanel.add(usernameField, gbc);
 
-        gbc.gridx = 0; gbc.gridy++; formPanel.add(passwordLabel, gbc);
+        row++;
+        gbc.gridx = 0; gbc.gridy = row; formPanel.add(passwordLabel, gbc);
         gbc.gridx = 1; formPanel.add(passwordField, gbc);
 
-        gbc.gridx = 0; gbc.gridy++; formPanel.add(phoneLabel, gbc);
+        row++;
+        gbc.gridx = 0; gbc.gridy = row; formPanel.add(phoneLabel, gbc);
         gbc.gridx = 1; formPanel.add(phoneField, gbc);
 
-        gbc.gridx = 0; gbc.gridy++; formPanel.add(emailLabel, gbc);
+        row++;
+        gbc.gridx = 0; gbc.gridy = row; formPanel.add(emailLabel, gbc);
         gbc.gridx = 1; formPanel.add(emailField, gbc);
 
-        gbc.gridx = 0; gbc.gridy++; formPanel.add(addressLabel, gbc);
+        row++;
+        gbc.gridx = 0; gbc.gridy = row; formPanel.add(addressLabel, gbc);
         gbc.gridx = 1; formPanel.add(addressField, gbc);
 
-        gbc.gridx = 0; gbc.gridy++; formPanel.add(nationalityLabel, gbc);
+        row++;
+        gbc.gridx = 0; gbc.gridy = row; formPanel.add(nationalityLabel, gbc);
         gbc.gridx = 1; formPanel.add(nationalityField, gbc);
 
-        gbc.gridx = 0; gbc.gridy++; formPanel.add(dobLabel, gbc);
+        row++;
+        gbc.gridx = 0; gbc.gridy = row; formPanel.add(dobLabel, gbc);
         gbc.gridx = 1; formPanel.add(dobField, gbc);
 
         // Scroll pane for form
@@ -99,16 +111,16 @@ public class ManageProfileInterface extends JPanel {
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Save Button in SOUTH panel (always visible)
+        // Save Button at SOUTH
         saveButton = new JButton("Save Changes");
-        saveButton.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        saveButton.setBackground(new Color(30, 144, 255));
-        saveButton.setForeground(Color.WHITE);
-        saveButton.setFocusPainted(false);
-        saveButton.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
+        saveButton.setFont(new Font("Arial", Font.BOLD, 17));
+        saveButton.setPreferredSize(new Dimension(180, 40));
+        saveButton.setFocusPainted(false); // optional, removes dotted focus border
+
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10,0,10,0));
         buttonPanel.add(saveButton);
 
         add(buttonPanel, BorderLayout.SOUTH);

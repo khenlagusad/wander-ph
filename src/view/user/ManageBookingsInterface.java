@@ -2,136 +2,108 @@ package view.user;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ManageBookingsInterface extends JPanel {
-    private JTable activeTable;
-    private JTable pastTable;
-    private DefaultTableModel activeTableModel;
-    private DefaultTableModel pastTableModel;
-    private JScrollPane activeScrollPane;
-    private JScrollPane pastScrollPane;
-    private JLabel activeLabel;
-    private JLabel pastLabel;
+
+    private JLabel titleLabel;
+    private JTable bookingsTable;
+    private JScrollPane scrollPane;
+
+    private JPanel bookingPanel;
+    private JLabel bookingIdLabel;
+    private JTextField bookingIdField;
+    private JButton cancelButton;
+    private JButton clearButton;
+
+    private DefaultTableModel tableModel;
 
     public ManageBookingsInterface() {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
+        initComponents();
+        addSampleData();
+    }
 
-        // Labels
-        activeLabel = new JLabel("Active Bookings");
-        activeLabel.setFont(new Font("Arial", Font.BOLD, 24));
+    private void initComponents() {
+        // -------------------
+        // Title
+        // -------------------
+        titleLabel = new JLabel("Your Active Bookings");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 26));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setForeground(new Color(0, 102, 204));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+        add(titleLabel, BorderLayout.NORTH);
 
-        pastLabel = new JLabel("Past Bookings");
-        pastLabel.setFont(new Font("Arial", Font.BOLD, 24));
-
-        // Active Bookings Table
-        String[] activeColumns = {"Booking ID", "Tour Name", "Pax Booked", "Booking Date", "Booking Time", "Cancel"};
-        activeTableModel = new DefaultTableModel(null, activeColumns) {
+        // -------------------
+        // Table setup
+        // -------------------
+        String[] columns = {"Booking ID", "Tour Name", "Pax Booked", "Booking Date", "Booking Time"};
+        tableModel = new DefaultTableModel(columns, 0) {
             @Override
-            public boolean isCellEditable(int row, int column) {
-                return column == 5; // Only Cancel button is editable
-            }
+            public boolean isCellEditable(int row, int column) { return false; }
         };
-        activeTable = new JTable(activeTableModel);
-        activeTable.getColumn("Cancel").setCellRenderer(new ButtonRenderer());
-        activeTable.getColumn("Cancel").setCellEditor(new ButtonEditor(new JCheckBox(), "Cancel"));
+        bookingsTable = new JTable(tableModel);
+        bookingsTable.setRowHeight(25);
+        scrollPane = new JScrollPane(bookingsTable);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        activeScrollPane = new JScrollPane(activeTable);
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 20, 50));
+        contentPanel.setBackground(Color.WHITE);
+        contentPanel.add(scrollPane, BorderLayout.CENTER);
+        add(contentPanel, BorderLayout.CENTER);
 
-        // Past Bookings Table
-        String[] pastColumns = {"Booking ID", "Tour Name", "Tour Guide", "Pax Booked", "Rate"};
-        pastTableModel = new DefaultTableModel(null, pastColumns) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return column == 4; // Only Rate button is editable
-            }
-        };
-        pastTable = new JTable(pastTableModel);
-        pastTable.getColumn("Rate").setCellRenderer(new ButtonRenderer());
-        pastTable.getColumn("Rate").setCellEditor(new ButtonEditor(new JCheckBox(), "Rate"));
+        // -------------------
+        // Booking Panel
+        // -------------------
+        bookingPanel = new JPanel(new GridBagLayout());
+        bookingPanel.setBackground(new Color(245, 245, 245));
+        bookingPanel.setBorder(BorderFactory.createTitledBorder("Manage Booking"));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 10, 5, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        pastScrollPane = new JScrollPane(pastTable);
+        // Booking ID
+        bookingIdLabel = new JLabel("Booking ID:");
+        gbc.gridx = 0; gbc.gridy = 0;
+        bookingPanel.add(bookingIdLabel, gbc);
 
-        // Layout
-        JPanel tablesPanel = new JPanel();
-        tablesPanel.setLayout(new BoxLayout(tablesPanel, BoxLayout.Y_AXIS));
-        tablesPanel.add(activeLabel);
-        tablesPanel.add(Box.createVerticalStrut(10));
-        tablesPanel.add(activeScrollPane);
-        tablesPanel.add(Box.createVerticalStrut(20));
-        tablesPanel.add(pastLabel);
-        tablesPanel.add(Box.createVerticalStrut(10));
-        tablesPanel.add(pastScrollPane);
+        bookingIdField = new JTextField();
+        gbc.gridx = 1; gbc.gridy = 0;
+        bookingPanel.add(bookingIdField, gbc);
 
-        add(tablesPanel, BorderLayout.CENTER);
+        // Buttons
+        cancelButton = new JButton("Cancel Booking");
+        clearButton = new JButton("Clear");
+        gbc.gridx = 0; gbc.gridy = 1;
+        bookingPanel.add(cancelButton, gbc);
+        gbc.gridx = 1; gbc.gridy = 1;
+        bookingPanel.add(clearButton, gbc);
 
-        // Sample entries
-        addActiveBooking("B001", "Island Adventure", 2, "2025-11-15", "10:00");
-        addActiveBooking("B002", "Mountain Trekking", 4, "2025-11-16", "08:30");
-        addActiveBooking("B003", "Cultural City Tour", 1, "2025-11-17", "13:00");
-
-        addPastBooking("B004", "Beach Relaxation", "John Doe", 3);
-        addPastBooking("B005", "Island Adventure", "Jane Smith", 2);
-        addPastBooking("B006", "Mountain Trekking", "Carlos Reyes", 1);
+        add(bookingPanel, BorderLayout.SOUTH);
     }
 
-    // Add entry methods
-    public void addActiveBooking(String bookingID, String tourName, int pax, String date, String time) {
-        activeTableModel.addRow(new Object[]{bookingID, tourName, pax, date, time, "Cancel"});
+    private void addSampleData() {
+        addBooking("B001", "Island Adventure", 2, "2025-11-15", "10:00");
+        addBooking("B002", "Mountain Trekking", 4, "2025-11-16", "08:30");
+        addBooking("B003", "Cultural City Tour", 1, "2025-11-17", "13:00");
     }
 
-    public void addPastBooking(String bookingID, String tourName, String guide, int pax) {
-        pastTableModel.addRow(new Object[]{bookingID, tourName, guide, pax, "Rate"});
+    // =========================
+    // MVC-Friendly Methods
+    // =========================
+    public void setActionListener(ActionListener e){
+        cancelButton.addActionListener(e);
+        clearButton.addActionListener(e);
     }
 
-    // Renderer and editor for buttons
-    private static class ButtonRenderer extends JButton implements TableCellRenderer {
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-                                                       boolean hasFocus, int row, int column) {
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
+    public String fetchBookingIdInput() { return bookingIdField.getText().trim(); }
+    public void clearInputs() { bookingIdField.setText(""); }
+    public void addBooking(String bookingId, String tourName, int pax, String date, String time) {
+        tableModel.addRow(new Object[]{bookingId, tourName, pax, date, time});
     }
-
-    private static class ButtonEditor extends DefaultCellEditor {
-        private JButton button;
-        private String label;
-
-        public ButtonEditor(JCheckBox checkBox, String label) {
-            super(checkBox);
-            button = new JButton();
-            button.setOpaque(true);
-            this.label = label;
-
-            button.addActionListener(e -> fireEditingStopped());
-        }
-
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            button.setText(label);
-            return button;
-        }
-
-        @Override
-        public Object getCellEditorValue() {
-            return label;
-        }
-    }
-
-    // Getters for table models (MVC)
-    public DefaultTableModel getActiveTableModel() {
-        return activeTableModel;
-    }
-
-    public DefaultTableModel getPastTableModel() {
-        return pastTableModel;
-    }
+    public DefaultTableModel getTableModel() { return tableModel; }
 }

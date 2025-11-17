@@ -99,7 +99,7 @@ public class ViewToursInterface extends JPanel {
 
         JLabel nameLabel = new JLabel(name);
         nameLabel.setFont(new Font("Arial", Font.BOLD, 20)); // Tour Name bigger
-        nameLabel.setForeground(new Color(30, 144, 255)); // Dodger Blue
+        nameLabel.setForeground(new Color(0, 102, 204)); // Dodger Blue
         infoPanel.add(nameLabel);
         infoPanel.add(Box.createVerticalStrut(3)); // small gap between name and description
 
